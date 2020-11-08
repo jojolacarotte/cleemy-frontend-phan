@@ -1,0 +1,55 @@
+<!-- Create expense -->
+<mat-expansion-panel hideToggle>
+	<mat-expansion-panel-header style="background-color:aquamarine">
+		<mat-panel-title>
+			Nouvelle dépense
+		</mat-panel-title>
+		<mat-panel-description>
+		</mat-panel-description>
+	</mat-expansion-panel-header>
+	<form class="example-form">
+		<input type="date" id="start" name="trip-start"
+          value="2018-07-22"
+          min="2018-01-01" max="2018-12-31">
+       </form>
+</mat-expansion-panel>
+
+<!-- List show/update -->
+<mat-accordion displayMode="flat" multi class="mat-table">
+
+	<section matSort class="mat-elevation-z2 mat-header-row">
+		<span class="mat-header-cell" mat-sort-header="vesselName">Date</span>
+		<span class="mat-header-cell" mat-sort-header="vesselId">Nature</span>
+		<span class="mat-header-cell" mat-sort-header="vesselStatus">Montant(€)</span>
+	</section>
+
+	<mat-expansion-panel *ngFor="let item of expense">
+		<mat-expansion-panel-header class="mat-row">
+			<span class="mat-cell">{{item.purchasedOn | date: 'd MMM y'}}</span>
+			<span class="mat-cell">{{item.nature}}</span>
+			<span class="mat-cell">{{item.originalAmount.amount}}</span>
+		</mat-expansion-panel-header>
+
+		<form class="example-form">
+			<input type="date" id="start" name="trip-start"
+       value="{{item.purchasedOn | date: 'y-MM-dd'}}"
+        (input)="item.purchasedOn = $event.target.value">
+
+			<mat-form-field class="example-full-width">
+				<mat-label>Favorite food</mat-label>
+				<input matInput placeholder="Ex. Pizza" value="{{item.nature}}" (input)="item.nature = $event.target.value">
+      </mat-form-field>
+
+				<mat-form-field appearance="fill">
+					<mat-label>Amount</mat-label>
+					<input matInput type="number" class="example-right-align" value="{{item.originalAmount.amount}}" (input)="item.originalAmount.amount = $event.target.value">
+					<span matSuffix>€</span>
+				</mat-form-field>
+				<button mat-raised-button (click)="updateExpense(item)" color="primary">Modifier</button>
+		</form>
+	</mat-expansion-panel>
+
+</mat-accordion>
+
+<mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [pageSize]="10"
+	[pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
