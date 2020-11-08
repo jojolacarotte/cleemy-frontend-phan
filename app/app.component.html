@@ -37,7 +37,7 @@
 
 			<mat-form-field class="example-full-width">
 				<mat-label>Favorite food</mat-label>
-				<input matInput placeholder="Ex. Pizza" value="{{item.nature}}" (input)="item.nature = $event.target.value">
+				<input matInput maxlength="600" placeholder="Le Nid" value="{{item.nature}}" (input)="item.nature = $event.target.value">
       </mat-form-field>
 
 				<mat-form-field appearance="fill">

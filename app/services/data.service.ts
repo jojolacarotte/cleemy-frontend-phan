@@ -34,8 +34,11 @@ export class DataService {
           expense.purchasedOn = moment(expense.purchasedOn).toDate();
         });
         this.expense$.next(data);
+        console.log("GET successfully");
       },
-      (error: HttpErrorResponse) => {}
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      }
     );
   }
 
@@ -45,9 +48,11 @@ export class DataService {
   putExpenses(expense: ExpenseItem): void {
     this.httpClient.put(this.API_URL + "/" + expense.id, expense).subscribe(
       success => {
-        console.log("suc");
+        console.log("PUT successfully");
       },
-      (error: HttpErrorResponse) => {}
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      }
     );
   }
 }
