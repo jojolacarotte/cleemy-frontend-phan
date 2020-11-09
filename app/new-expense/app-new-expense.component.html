@@ -1,7 +1,7 @@
 <form [formGroup]="expenseForm" (ngSubmit)="onSubmit(expenseForm.value)">
 	<input type="date" name="trip-start"
-    value="{{purchasedOn | date: 'y-MM-dd'}}"
     formControlName="purchasedOn">
+    {{expense?.id}}
 
 	<mat-form-field class="example-full-width">
 		<mat-label>Favorite food</mat-label>
@@ -14,7 +14,7 @@
           formControlName="amount"
           min="1">
 			</mat-form-field>
-			<select formControlName="currency" name="currency">
+				<select formControlName="currency" name="currency">
         <option value="EUR">Euros</option>
         <option value="GBP">Livre sterling</option>
       </select>
@@ -23,11 +23,11 @@
 		<mat-form-field class="example-full-width">
 			<mat-label>Leave a comment</mat-label>
 			<textarea matInput placeholder="Fête de 5 jours sur l'île d'Oléron"
-        formControlName="comment"
-        max="600"></textarea>
+      formControlName="comment"
+      max="600"></textarea>
 		</mat-form-field>
 
 		<button mat-raised-button disabled="{{expenseForm.invalid}}" type="submit"
-  color="primary">Sauvegarder</button>
+color="primary">Sauvegarder</button>
 
 </form>

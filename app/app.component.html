@@ -7,7 +7,7 @@
 		<mat-panel-description>
 		</mat-panel-description>
 	</mat-expansion-panel-header>
-  <app-new-expense></app-new-expense>
+	<app-new-expense></app-new-expense>
 </mat-expansion-panel>
 
 <!-- List show/update -->
@@ -16,34 +16,17 @@
 	<section matSort class="mat-elevation-z2 mat-header-row">
 		<span class="mat-header-cell" mat-sort-header="vesselName">Date</span>
 		<span class="mat-header-cell" mat-sort-header="vesselId">Nature</span>
-		<span class="mat-header-cell" mat-sort-header="vesselStatus">Montant(€)</span>
+		<span class="mat-header-cell" mat-sort-header="vesselStatus">Montant</span>
 	</section>
 
 	<mat-expansion-panel *ngFor="let item of expense">
 		<mat-expansion-panel-header class="mat-row">
 			<span class="mat-cell">{{item.purchasedOn | date: 'd MMM y'}}</span>
 			<span class="mat-cell">{{item.nature}}</span>
-			<span class="mat-cell">{{item.originalAmount.amount}}</span>
+			<span class="mat-cell">{{item.originalAmount.amount}} {{item.originalAmount.currency}}</span>
 		</mat-expansion-panel-header>
 
-		<form class="example-form">
-			<input type="date" id="start" name="trip-start"
-       value="{{item.purchasedOn | date: 'y-MM-dd'}}"
-        (input)="item.purchasedOn = $event.target.value">
-
-			<mat-form-field class="example-full-width">
-				<mat-label>Favorite food</mat-label>
-				<input matInput maxlength="120" placeholder="Le Nid" value="{{item.nature}}" (input)="item.nature = $event.target.value">
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Amount</mat-label>
-        <input matInput type="number" class="example-right-align" value="{{item.originalAmount.amount}}" (input)="item.originalAmount.amount = $event.target.value" min="1">
-        <span matSuffix>€</span>
-      </mat-form-field>
-      <button mat-raised-button (click)="updateExpense(item)" color="primary">Modifier</button>
-
-		</form>
+		<app-new-expense [expense]=item></app-new-expense>
 	</mat-expansion-panel>
 
 </mat-accordion>

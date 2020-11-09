@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule, MatIconModule, MatInputModule, MatNativeDateModule } from "@angular/material";
@@ -17,7 +18,7 @@ import { NewExpenseComponent } from "./app-new-expense.component";
     MatNativeDateModule,
     MatIconModule
   ],
-  providers: [DataService],
+  providers: [DataService, DatePipe],
   declarations: [NewExpenseComponent],
   exports:[NewExpenseComponent]
 })

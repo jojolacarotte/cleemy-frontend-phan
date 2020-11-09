@@ -32,7 +32,7 @@ export class DataService {
         data.map(expense => {
           expense.createdAt = moment(expense.createdAt).toDate();
           expense.lastModifiedAt = moment(expense.lastModifiedAt).toDate();
-          expense.purchasedOn = moment(expense.purchasedOn).toDate();
+          //expense.purchasedOn = moment(expense.purchasedOn).toDate();
         });
         this.expense$.next(data);
         console.log("GET successfully");
