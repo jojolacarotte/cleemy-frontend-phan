@@ -4,8 +4,6 @@
 		<mat-panel-title>
 			Nouvelle dépense
 		</mat-panel-title>
-		<mat-panel-description>
-		</mat-panel-description>
 	</mat-expansion-panel-header>
 	<app-new-expense></app-new-expense>
 </mat-expansion-panel>
@@ -16,7 +14,7 @@
 	<section matSort class="mat-elevation-z2 mat-header-row">
 		<span class="mat-header-cell" mat-sort-header="purchasedOn">Date</span>
 		<span class="mat-header-cell" mat-sort-header="nature">Nature</span>
-		<span class="mat-header-cell" mat-sort-header="originalAmount">Montant</span>
+		<span class="mat-header-cell" mat-sort-header="amount">Montant</span>
 	</section>
 
 	<mat-expansion-panel *ngFor="let item of displayedRows$ | async">

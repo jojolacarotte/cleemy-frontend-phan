@@ -17,10 +17,9 @@ import { MatIconModule } from "@angular/material/icon";
 
 import { AppComponent } from "./app.component";
 import { DataService } from "./services/data.service";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { NewExpenseModule } from "./new-expense/app-new-expense.module";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+
 
 @NgModule({
   imports: [
