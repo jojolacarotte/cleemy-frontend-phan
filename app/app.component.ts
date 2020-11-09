@@ -10,6 +10,7 @@ import { fromMatPaginator, paginateRows } from "./datasource-utils";
 import { DataService } from "./services/data.service";
 import { Expense, ExpenseItem } from "./models/expense.model";
 import { FormControl } from "@angular/forms";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "my-app",
@@ -49,13 +50,19 @@ export class AppComponent {
   }
 
   updateExpense(item: ExpenseItem) {
-    this.DataService.putExpenses(item);
+    this.DataService.putExpenses(item).subscribe(
+      success => {
+        console.log("PUT successfully");
+      },
+      (error: HttpErrorResponse) => {
+        // Cas d'erreur volontairement pas géré
+        console.log(error);
+      }
+    );
   }
 
   handleDate(item: any) {
     console.log("s", item);
     item.item.purchasedOn = new Date(item.value);
-
-    //handleDate({item:item, value:$event.target.value})
   }
 }

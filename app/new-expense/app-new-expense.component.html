@@ -1,0 +1,19 @@
+<form [formGroup]="expenseForm">
+  <input type="date" id="start" name="trip-start"
+        formControlName="date">
+        
+  <mat-form-field class="example-full-width">
+    <mat-label>Favorite food</mat-label>
+    <input matInput maxlength="600" placeholder="Le Nid" formControlName="nature">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Amount</mat-label>
+    <input matInput type="number" class="example-right-align"
+    formControlName="amount">
+    <span matSuffix>€</span>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="updateExpense(item)" color="primary">Modifier</button>
+  
+</form>

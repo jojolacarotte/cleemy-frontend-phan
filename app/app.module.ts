@@ -13,10 +13,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
+import {MatIconModule} from '@angular/material/icon';
+
 
 import { AppComponent } from "./app.component";
 import { DataService } from "./services/data.service";
 import { HttpClientModule } from "@angular/common/http";
+import { NewExpenseModule } from "./new-expense/app-new-expense.module";
 
 @NgModule({
   imports: [
@@ -32,7 +35,9 @@ import { HttpClientModule } from "@angular/common/http";
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatIconModule,
+    NewExpenseModule
   ],
   providers: [DataService],
   declarations: [AppComponent],

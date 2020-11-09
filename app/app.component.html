@@ -7,11 +7,7 @@
 		<mat-panel-description>
 		</mat-panel-description>
 	</mat-expansion-panel-header>
-	<form class="example-form">
-		<input type="date" id="start" name="trip-start"
-          value="2018-07-22"
-          min="2018-01-01" max="2018-12-31">
-       </form>
+  <app-new-expense></app-new-expense>
 </mat-expansion-panel>
 
 <!-- List show/update -->
@@ -40,12 +36,13 @@
 				<input matInput maxlength="600" placeholder="Le Nid" value="{{item.nature}}" (input)="item.nature = $event.target.value">
       </mat-form-field>
 
-				<mat-form-field appearance="fill">
-					<mat-label>Amount</mat-label>
-					<input matInput type="number" class="example-right-align" value="{{item.originalAmount.amount}}" (input)="item.originalAmount.amount = $event.target.value">
-					<span matSuffix>€</span>
-				</mat-form-field>
-				<button mat-raised-button (click)="updateExpense(item)" color="primary">Modifier</button>
+      <mat-form-field appearance="fill">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" class="example-right-align" value="{{item.originalAmount.amount}}" (input)="item.originalAmount.amount = $event.target.value">
+        <span matSuffix>€</span>
+      </mat-form-field>
+      <button mat-raised-button (click)="updateExpense(item)" color="primary">Modifier</button>
+
 		</form>
 	</mat-expansion-panel>
 

@@ -6,6 +6,7 @@ import {
 import { Injectable } from "@angular/core";
 import moment from "moment";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
 import { flatMap } from "rxjs/operators";
 import { map } from "rxjs/operators/map";
@@ -45,14 +46,7 @@ export class DataService {
   /**
    * Update a specific expense item
    */
-  putExpenses(expense: ExpenseItem): void {
-    this.httpClient.put(this.API_URL + "/" + expense.id, expense).subscribe(
-      success => {
-        console.log("PUT successfully");
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-      }
-    );
+  putExpenses(expense: ExpenseItem): Observable<ExpenseItem> {
+    return this.httpClient.put<ExpenseItem>(this.API_URL + "/" + expense.id, expense);
   }
 }
