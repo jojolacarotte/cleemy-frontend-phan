@@ -49,4 +49,11 @@ export class DataService {
   putExpenses(expense: ExpenseItem): Observable<ExpenseItem> {
     return this.httpClient.put<ExpenseItem>(this.API_URL + "/" + expense.id, expense);
   }
+
+  /**
+   * Update a specific expense item
+   */
+  postExpense(expense: ExpenseItem): Observable<ExpenseItem> {
+    return this.httpClient.post<ExpenseItem>(this.API_URL, expense);
+  }
 }

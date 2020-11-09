@@ -60,9 +60,4 @@ export class AppComponent {
       }
     );
   }
-
-  handleDate(item: any) {
-    console.log("s", item);
-    item.item.purchasedOn = new Date(item.value);
-  }
 }
