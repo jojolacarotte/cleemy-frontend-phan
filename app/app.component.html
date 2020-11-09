@@ -38,7 +38,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Amount</mat-label>
-        <input matInput type="number" class="example-right-align" value="{{item.originalAmount.amount}}" (input)="item.originalAmount.amount = $event.target.value">
+        <input matInput type="number" class="example-right-align" value="{{item.originalAmount.amount}}" (input)="item.originalAmount.amount = $event.target.value" min="1">
         <span matSuffix>€</span>
       </mat-form-field>
       <button mat-raised-button (click)="updateExpense(item)" color="primary">Modifier</button>

@@ -17,4 +17,9 @@ export class NewExpenseComponent {
       amount: ['', Validators.required],
     });
   }
+
+  onSubmit(i) {
+    console.log('p', i)
+  }
+
 }
