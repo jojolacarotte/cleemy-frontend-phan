@@ -1,7 +1,13 @@
 import { DatePipe } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, Input, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators
+} from "@angular/forms";
 import { ExpenseItem } from "../models/expense.model";
 import { DataService } from "./../services/data.service";
 
@@ -12,7 +18,7 @@ import { DataService } from "./../services/data.service";
 })
 export class NewExpenseComponent implements OnInit {
   @Input() expense: ExpenseItem;
-  expenseForm;
+  expenseForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -20,14 +26,14 @@ export class NewExpenseComponent implements OnInit {
     private datePipe: DatePipe
   ) {
     this.expenseForm = this.fb.group({
-      purchasedOn: [new Date(), Validators.required],
-      nature: ["", Validators.required],
+      purchasedOn: ["2020-11-01", Validators.required],
+      nature: ["R", Validators.required],
       originalAmount: this.fb.group({
-        amount: ["", Validators.required],
+        amount: ["1", Validators.required],
         currency: ["EUR", Validators.required]
       }),
-      comment: ["", Validators.required],
-      id: ["", Validators.required]
+      comment: ["M", Validators.required],
+      id: [""]
     });
   }
 
@@ -35,12 +41,18 @@ export class NewExpenseComponent implements OnInit {
     this.expenseForm.patchValue({ ...this.expense });
   }
 
-  onSubmit(i: ExpenseItem): void {
+  /**
+   * Update or Create expense on submittion
+   */
+  onSubmit(i: ExpenseItem, formDirective: FormGroupDirective): void {
     if (this.expense) {
       this.DataService.putExpenses(i).subscribe(
         success => {
           console.log("PUT successfully");
-          this.DataService.getExpenses();
+          this.clearForm(formDirective);
+          setTimeout(() => {
+            this.DataService.getExpenses();
+          }, 500);
         },
         (error: HttpErrorResponse) => {
           // Cas d'erreur volontairement pas géré
@@ -51,6 +63,10 @@ export class NewExpenseComponent implements OnInit {
       this.DataService.postExpense(i).subscribe(
         success => {
           console.log("POST successfully");
+          this.clearForm(formDirective);
+          setTimeout(() => {
+            this.DataService.getExpenses();
+          }, 500);
         },
         (error: HttpErrorResponse) => {
           // Cas d'erreur volontairement pas géré
@@ -60,15 +76,29 @@ export class NewExpenseComponent implements OnInit {
     }
   }
 
+  /**
+   * Remove a specific expense
+   */
   removeExpense(id: string): void {
     this.DataService.deleteExpense(id).subscribe(
       success => {
         console.log("DELETE successfully");
+        setTimeout(() => {
+          this.DataService.getExpenses();
+        }, 500);
       },
       (error: HttpErrorResponse) => {
         // Cas d'erreur volontairement pas géré
         console.log(error);
       }
     );
+  }
+
+  /**
+   * Remove all values in form
+   */
+  clearForm(formDirective: FormGroupDirective) {
+    this.expenseForm.reset();
+    formDirective.resetForm();
   }
 }

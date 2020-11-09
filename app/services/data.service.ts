@@ -32,12 +32,12 @@ export class DataService {
         data.map(expense => {
           expense.createdAt = moment(expense.createdAt).toDate();
           expense.lastModifiedAt = moment(expense.lastModifiedAt).toDate();
-          //expense.purchasedOn = moment(expense.purchasedOn).toDate();
         });
+        console.log("GET successfully", data);
         this.expense$.next(data);
-        console.log("GET successfully");
       },
       (error: HttpErrorResponse) => {
+        console.log("GET");
         console.log(error);
       }
     );

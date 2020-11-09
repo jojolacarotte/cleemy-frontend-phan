@@ -32,10 +32,9 @@ export class AppComponent {
   constructor(private DataService: DataService) {}
 
   ngOnInit() {
-    this.loading = true;
     this.DataService.expense$.subscribe(expense => {
+      console.log("update", expense);
       this.expense = expense;
-      this.loading = false;
     });
     this.DataService.getExpenses();
 
@@ -47,17 +46,5 @@ export class AppComponent {
       sortRows(sortEvents$),
       paginateRows(pageEvents$)
     );*/
-  }
-
-  updateExpense(item: ExpenseItem) {
-    this.DataService.putExpenses(item).subscribe(
-      success => {
-        console.log("PUT successfully");
-      },
-      (error: HttpErrorResponse) => {
-        // Cas d'erreur volontairement pas géré
-        console.log(error);
-      }
-    );
   }
 }

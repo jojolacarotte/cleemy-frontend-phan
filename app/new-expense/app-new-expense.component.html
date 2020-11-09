@@ -1,4 +1,4 @@
-<form [formGroup]="expenseForm" (ngSubmit)="onSubmit(expenseForm.value)">
+<form [formGroup]="expenseForm" #formDirective="ngForm" (ngSubmit)="onSubmit(expenseForm.value, formDirective)">
 	<input type="date" name="trip-start"
     value="{{expenseForm.controls.purchasedOn.value | date: 'y-MM-dd'}}"
     formControlName="purchasedOn">
@@ -30,6 +30,5 @@
 		<button mat-raised-button disabled="{{expenseForm.invalid}}" type="submit"
 color="primary">Sauvegarder</button>
 
-		<button mat-button color="warn" (click)="removeExpense(expenseForm.controls.id.value)">Supprimer</button>
-
 </form>
+<button *ngIf="expense" mat-button color="warn" (click)="removeExpense(expenseForm.controls.id.value)">Supprimer</button>
