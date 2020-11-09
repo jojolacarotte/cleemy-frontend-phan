@@ -11,6 +11,7 @@ import { DataService } from "./services/data.service";
 import { Expense, ExpenseItem } from "./models/expense.model";
 import { FormControl } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: "my-app",
@@ -29,7 +30,14 @@ export class AppComponent {
 
   date = new FormControl(new Date());
 
-  constructor(private DataService: DataService) {}
+  constructor(private DataService: DataService, 
+              private translate: TranslateService) {
+    translate.addLangs(['en', 'fr']);
+    translate.setDefaultLang('fr');
+
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+  }
 
   ngOnInit() {
     this.DataService.expense$.subscribe(expense => {

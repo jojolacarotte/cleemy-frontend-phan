@@ -7,10 +7,7 @@ import { Injectable } from "@angular/core";
 import moment from "moment";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
-import { flatMap } from "rxjs/operators";
-import { map } from "rxjs/operators/map";
-import { Expense, ExpenseItem } from "../models/expense.model";
+import { ExpenseItem } from "../models/expense.model";
 
 @Injectable()
 export class DataService {

@@ -18,8 +18,14 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { AppComponent } from "./app.component";
 import { DataService } from "./services/data.service";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NewExpenseModule } from "./new-expense/app-new-expense.module";
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @NgModule({
   imports: [
@@ -37,7 +43,14 @@ import { NewExpenseModule } from "./new-expense/app-new-expense.module";
     ReactiveFormsModule,
     MatNativeDateModule,
     MatIconModule,
-    NewExpenseModule
+    NewExpenseModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [DataService],
   declarations: [AppComponent],
