@@ -13,19 +13,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
-import {MatIconModule} from '@angular/material/icon';
-
+import { MatIconModule } from "@angular/material/icon";
 
 import { AppComponent } from "./app.component";
 import { DataService } from "./services/data.service";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NewExpenseModule } from "./new-expense/app-new-expense.module";
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-
-export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient);
-}
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 
 @NgModule({
   imports: [
@@ -43,14 +38,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     MatNativeDateModule,
     MatIconModule,
-    NewExpenseModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    NewExpenseModule
   ],
   providers: [DataService],
   declarations: [AppComponent],

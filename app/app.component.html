@@ -8,24 +8,18 @@
 		</mat-panel-description>
 	</mat-expansion-panel-header>
 	<app-new-expense></app-new-expense>
-        <label>
-        {{ 'HOME.SELECT' | translate }}
-        <select #langSelect (change)="translate.use(langSelect.value)">
-          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-        </select>
-      </label>
 </mat-expansion-panel>
 
 <!-- List show/update -->
 <mat-accordion displayMode="flat" multi class="mat-table">
 
 	<section matSort class="mat-elevation-z2 mat-header-row">
-		<span class="mat-header-cell" mat-sort-header="vesselName">Date</span>
-		<span class="mat-header-cell" mat-sort-header="vesselId">Nature</span>
-		<span class="mat-header-cell" mat-sort-header="vesselStatus">Montant</span>
+		<span class="mat-header-cell" mat-sort-header="purchasedOn">Date</span>
+		<span class="mat-header-cell" mat-sort-header="nature">Nature</span>
+		<span class="mat-header-cell" mat-sort-header="originalAmount">Montant</span>
 	</section>
 
-	<mat-expansion-panel *ngFor="let item of expense">
+	<mat-expansion-panel *ngFor="let item of displayedRows$ | async">
 		<mat-expansion-panel-header class="mat-row">
 			<span class="mat-cell">{{item.purchasedOn | date: 'd MMM y'}}</span>
 			<span class="mat-cell">{{item.nature}}</span>

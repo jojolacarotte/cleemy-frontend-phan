@@ -11,7 +11,7 @@ import { DataService } from "./services/data.service";
 import { Expense, ExpenseItem } from "./models/expense.model";
 import { FormControl } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "my-app",
@@ -30,18 +30,12 @@ export class AppComponent {
 
   date = new FormControl(new Date());
 
-  constructor(private DataService: DataService, 
-              private translate: TranslateService) {
-    translate.addLangs(['en', 'fr']);
-    translate.setDefaultLang('fr');
+  displayedRows$;
 
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
-  }
+  constructor(private DataService: DataService) {}
 
   ngOnInit() {
     this.DataService.expense$.subscribe(expense => {
-      console.log("update", expense);
       this.expense = expense;
     });
     this.DataService.getExpenses();
@@ -49,10 +43,9 @@ export class AppComponent {
     const sortEvents$: Observable<Sort> = fromMatSort(this.sort);
     const pageEvents$: Observable<PageEvent> = fromMatPaginator(this.paginator);
 
-    /*this.totalRows$ = rows$.pipe(map(rows => rows.length));
-    this.displayedRows$ = rows$.pipe(
+    this.displayedRows$ = this.DataService.expense$.pipe(
       sortRows(sortEvents$),
       paginateRows(pageEvents$)
-    );*/
+    );
   }
 }
