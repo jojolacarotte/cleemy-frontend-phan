@@ -92,40 +92,6 @@ export function sortRows<U>(
   );
 }
 
-/* TODO: handle ngIf'd MatPager controls.
-
-function isEqualPageEvents(a: PageEvent, b: PageEvent) {
-  return a.length === b.length
-    && a.pageSize === b.pageSize
-    && a.pageIndex === b.pageIndex;
-
-}
-
-
-export function fromMatPaginators(pagers: QueryList<MatPaginator>): Observable<PageEvent> {
-  return pagers.changes.pipe(
-    startWith(pagers),
-    switchMap(_ =>
-      merge(...pagers.map(p => fromMatPaginator(p))).pipe(
-        distinctUntilChanged(isEqualPageEvents),
-        tap(page => pagers.forEach(pager => {
-          if (pager.pageIndex !== page.pageIndex) {
-            pager.pageIndex = page.pageIndex;
-          }
-          if (pager.pageSize !== page.pageSize) {
-            pager.pageSize = page.pageSize;
-          }
-          if (pager.length !== page.length) {
-            pager.length = page.length;
-          }
-        }))
-      )
-    ),
-    distinctUntilChanged(isEqualPageEvents),
-  );
-}
- */
-
 /** Creates an Observable stream of PageEvent objects from a MatPaginator component */
 export function fromMatPaginator(pager: MatPaginator): Observable<PageEvent> {
   return concat(

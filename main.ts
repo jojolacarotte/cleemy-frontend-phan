@@ -9,6 +9,7 @@ import "./test.ts";
 
 import { AppModule } from "./app/app.module";
 import { TestBed, async } from "@angular/core/testing";
+import { getTestBed } from "@angular/core/testing";
 import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
@@ -36,4 +37,9 @@ platformBrowserDynamicTesting()
 
   window.onload(new Event("anything"));
   window.jasmineRef = jasmine.getEnv();
+
+  TestBed.initTestEnvironment(
+    BrowserDynamicTestingModule,
+    platformBrowserDynamicTesting()
+  );
 })();

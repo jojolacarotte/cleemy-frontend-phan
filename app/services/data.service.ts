@@ -7,6 +7,7 @@ import { Injectable } from "@angular/core";
 import moment from "moment";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
+import { Subject } from "rxjs/Subject";
 import { ExpenseItem } from "../models/expense.model";
 
 @Injectable()
@@ -14,9 +15,7 @@ export class DataService {
   private readonly API_URL =
     "https://2byv9.sse.codesandbox.io/api/expenseItems";
 
-  expense$: BehaviorSubject<ExpenseItem[]> = new BehaviorSubject<ExpenseItem[]>(
-    []
-  );
+  expense$: Subject<ExpenseItem[]> = new Subject<ExpenseItem[]>();;
 
   constructor(private httpClient: HttpClient) {}
 
