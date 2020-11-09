@@ -1,7 +1,7 @@
 <form [formGroup]="expenseForm" (ngSubmit)="onSubmit(expenseForm.value)">
 	<input type="date" name="trip-start"
+    value="{{expenseForm.controls.purchasedOn.value | date: 'y-MM-dd'}}"
     formControlName="purchasedOn">
-    {{expense?.id}}
 
 	<mat-form-field class="example-full-width">
 		<mat-label>Favorite food</mat-label>
@@ -29,5 +29,7 @@
 
 		<button mat-raised-button disabled="{{expenseForm.invalid}}" type="submit"
 color="primary">Sauvegarder</button>
+
+		<button mat-button color="warn" (click)="removeExpense(expenseForm.controls.id.value)">Supprimer</button>
 
 </form>

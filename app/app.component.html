@@ -23,7 +23,7 @@
 		<mat-expansion-panel-header class="mat-row">
 			<span class="mat-cell">{{item.purchasedOn | date: 'd MMM y'}}</span>
 			<span class="mat-cell">{{item.nature}}</span>
-			<span class="mat-cell">{{item.originalAmount.amount}} {{item.originalAmount.currency}}</span>
+			<span class="mat-cell">{{item.originalAmount?.amount}} {{item.originalAmount?.currency}}</span>
 		</mat-expansion-panel-header>
 
 		<app-new-expense [expense]=item></app-new-expense>

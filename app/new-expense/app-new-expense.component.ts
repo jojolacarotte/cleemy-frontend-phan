@@ -20,7 +20,7 @@ export class NewExpenseComponent implements OnInit {
     private datePipe: DatePipe
   ) {
     this.expenseForm = this.fb.group({
-      purchasedOn: ["", Validators.required],
+      purchasedOn: [new Date(), Validators.required],
       nature: ["", Validators.required],
       originalAmount: this.fb.group({
         amount: ["", Validators.required],
@@ -35,11 +35,12 @@ export class NewExpenseComponent implements OnInit {
     this.expenseForm.patchValue({ ...this.expense });
   }
 
-  onSubmit(i: ExpenseItem) {
+  onSubmit(i: ExpenseItem): void {
     if (this.expense) {
       this.DataService.putExpenses(i).subscribe(
         success => {
           console.log("PUT successfully");
+          this.DataService.getExpenses();
         },
         (error: HttpErrorResponse) => {
           // Cas d'erreur volontairement pas géré
@@ -57,5 +58,17 @@ export class NewExpenseComponent implements OnInit {
         }
       );
     }
+  }
+
+  removeExpense(id: string): void {
+    this.DataService.deleteExpense(id).subscribe(
+      success => {
+        console.log("DELETE successfully");
+      },
+      (error: HttpErrorResponse) => {
+        // Cas d'erreur volontairement pas géré
+        console.log(error);
+      }
+    );
   }
 }
