@@ -1,4 +1,3 @@
-import { DatePipe } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, Input, OnInit } from "@angular/core";
 import {
@@ -22,8 +21,7 @@ export class NewExpenseComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private DataService: DataService,
-    private datePipe: DatePipe
+    private DataService: DataService
   ) {
     this.expenseForm = this.fb.group({
       purchasedOn: ["2020-11-01", Validators.required],
@@ -44,18 +42,15 @@ export class NewExpenseComponent implements OnInit {
   /**
    * Update or Create expense on submittion
    */
-  onSubmit(i: ExpenseItem, formDirective: FormGroupDirective): void {
+  onSubmit(i: ExpenseItem, formDirective?: FormGroupDirective): void {
     if (this.expense) {
       this.DataService.putExpenses(i).subscribe(
         success => {
           console.log("PUT successfully");
-          this.clearForm(formDirective);
-          setTimeout(() => {
-            this.DataService.getExpenses();
-          }, 500);
+          formDirective ? this.clearForm(formDirective) : this.clearForm();
+          this.refreshExpense();
         },
         (error: HttpErrorResponse) => {
-          // Cas d'erreur volontairement pas géré
           console.log(error);
         }
       );
@@ -64,12 +59,9 @@ export class NewExpenseComponent implements OnInit {
         success => {
           console.log("POST successfully");
           this.clearForm(formDirective);
-          setTimeout(() => {
-            this.DataService.getExpenses();
-          }, 500);
+          this.refreshExpense();
         },
         (error: HttpErrorResponse) => {
-          // Cas d'erreur volontairement pas géré
           console.log(error);
         }
       );
@@ -83,12 +75,9 @@ export class NewExpenseComponent implements OnInit {
     this.DataService.deleteExpense(id).subscribe(
       success => {
         console.log("DELETE successfully");
-        setTimeout(() => {
-          this.DataService.getExpenses();
-        }, 500);
+        this.refreshExpense();
       },
       (error: HttpErrorResponse) => {
-        // Cas d'erreur volontairement pas géré
         console.log(error);
       }
     );
@@ -97,8 +86,23 @@ export class NewExpenseComponent implements OnInit {
   /**
    * Remove all values in form
    */
-  clearForm(formDirective: FormGroupDirective) {
+  clearForm(formDirective?: FormGroupDirective) {
     this.expenseForm.reset();
-    formDirective.resetForm();
+    if (formDirective) {
+      formDirective.resetForm();
+    }
+  }
+
+  refreshExpense() {
+    /**
+     * 2 solutions:
+     * - modifier les données dans l'observables
+     * - refaire un getExpenses
+     * J'ai préféré prendre la rapidité
+     */
+    setTimeout(() => {
+    // Pour compenser le chargement de nodejs de la modif du db.json
+      this.DataService.getExpenses();
+    }, 1000);
   }
 }

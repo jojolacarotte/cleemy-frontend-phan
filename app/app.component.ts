@@ -22,10 +22,6 @@ export class AppComponent {
 
   expense: ExpenseItem[] = [];
 
-  loading: boolean;
-
-  date = new FormControl(new Date());
-
   displayedRows$: Observable<ExpenseItem[]>;
   totalRows$: Observable<number>;
 

@@ -5,3 +5,4 @@ import 'zone.js/dist/sync-test';
 import 'zone.js/dist/proxy';
 import 'zone.js/dist/jasmine-patch';
 import './app/services/data.service.spec.ts'
+import './app/new-expense/app-new-expense.spec.ts'
