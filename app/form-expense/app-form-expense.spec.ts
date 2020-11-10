@@ -3,19 +3,19 @@ import { async, fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { FormGroupDirective } from "@angular/forms";
 import { of } from "rxjs/observable/of";
 import { DataService } from "../services/data.service";
-import { NewExpenseComponent } from "./app-new-expense.component";
-import { NewExpenseModule } from "./app-new-expense.module";
+import { FormExpenseComponent } from "./app-form-expense.component";
+import { FormExpenseComponentModule } from "./app-form-expense.module";
 
 describe("Expense form", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NewExpenseModule, HttpClientModule],
+      imports: [FormExpenseComponentModule, HttpClientModule],
       providers: [DataService]
     }).compileComponents();
   }));
 
   it("should have value from WS", fakeAsync(() => {
-    const fixture = TestBed.createComponent(NewExpenseComponent);
+    const fixture = TestBed.createComponent(FormExpenseComponent);
     const component = fixture.componentInstance;
     const debugElement = fixture.debugElement;
 
@@ -55,7 +55,7 @@ describe("Expense form", () => {
   }));
 
   // it("should have value from WS", fakeAsync(() => {
-  //   const fixture = TestBed.createComponent(NewExpenseComponent);
+  //   const fixture = TestBed.createComponent(FormExpenseComponentComponent);
   //   const component = fixture.componentInstance;
   //   const debugElement = fixture.debugElement;
 
@@ -91,7 +91,7 @@ describe("Expense form", () => {
 
   //   it('should clear form', fakeAsync(() => {
 
-  //   const fixture = TestBed.createComponent(NewExpenseComponent);
+  //   const fixture = TestBed.createComponent(FormExpenseComponentComponent);
   //   const component = fixture.componentInstance;
   //   const debugElement = fixture.debugElement;
 

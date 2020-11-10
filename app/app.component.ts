@@ -20,9 +20,7 @@ export class AppComponent {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  // expense: ExpenseItem[] = [];
-
-  displayedRows$: ExpenseItem[];
+  displayedRows: ExpenseItem[];
   totalRows$: Observable<number>;
   pageSize: number = 5;
 
@@ -40,7 +38,7 @@ export class AppComponent {
         paginateRows(pageEvents$)
       )
       .subscribe(expense => {
-        this.displayedRows$ = expense;
+        this.displayedRows = expense;
       });
     this.DataService.getExpenses();
     this.totalRows$ = this.DataService.expense$.pipe(map(rows => rows.length));

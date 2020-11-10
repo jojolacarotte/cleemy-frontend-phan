@@ -1,7 +1,3 @@
-export interface Expense {
-  expenseItems: ExpenseItem[];
-}
-
 export interface ExpenseItem {
   id: string;
   purchasedOn: Date;

@@ -1,10 +1,15 @@
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule, MatIconModule, MatInputModule, MatNativeDateModule } from "@angular/material";
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatInputModule,
+  MatNativeDateModule
+} from "@angular/material";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DataService } from "../services/data.service";
-import { NewExpenseComponent } from "./app-new-expense.component";
+import { FormExpenseComponent } from "./app-form-expense.component";
 
 @NgModule({
   imports: [
@@ -18,7 +23,7 @@ import { NewExpenseComponent } from "./app-new-expense.component";
     MatIconModule
   ],
   providers: [DataService],
-  declarations: [NewExpenseComponent],
-  exports:[NewExpenseComponent]
+  declarations: [FormExpenseComponent],
+  exports: [FormExpenseComponent]
 })
-export class NewExpenseModule {}
+export class FormExpenseComponentModule {}

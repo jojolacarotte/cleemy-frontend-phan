@@ -11,26 +11,23 @@ import { ExpenseItem } from "../models/expense.model";
 import { DataService } from "./../services/data.service";
 
 @Component({
-  selector: "app-new-expense",
-  templateUrl: "./app-new-expense.component.html",
-  styleUrls: ["./app-new-expense.component.scss"]
+  selector: "app-form-expense",
+  templateUrl: "./app-form-expense.component.html",
+  styleUrls: ["./app-form-expense.component.scss"]
 })
-export class NewExpenseComponent implements OnInit {
+export class FormExpenseComponent implements OnInit {
   @Input() expense: ExpenseItem;
   expenseForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private DataService: DataService
-  ) {
+  constructor(private fb: FormBuilder, private DataService: DataService) {
     this.expenseForm = this.fb.group({
-      purchasedOn: ["2020-11-01", Validators.required],
-      nature: ["R", Validators.required],
+      purchasedOn: ["", Validators.required],
+      nature: ["", Validators.required],
       originalAmount: this.fb.group({
-        amount: ["1", Validators.required],
-        currency: ["EUR", Validators.required]
+        amount: ["", Validators.required],
+        currency: ["", Validators.required]
       }),
-      comment: ["M", Validators.required],
+      comment: ["", Validators.required],
       id: [""]
     });
   }
@@ -101,7 +98,7 @@ export class NewExpenseComponent implements OnInit {
      * J'ai préféré prendre la rapidité
      */
     setTimeout(() => {
-    // Pour compenser le chargement de nodejs de la modif du db.json
+      // Pour compenser le chargement de nodejs de la modif du db.json
       this.DataService.getExpenses();
     }, 1000);
   }

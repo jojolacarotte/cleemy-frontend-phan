@@ -5,7 +5,6 @@ import {
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import moment from "moment";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 import { ExpenseItem } from "../models/expense.model";
@@ -33,7 +32,6 @@ export class DataService {
         this.expense$.next(data);
       },
       (error: HttpErrorResponse) => {
-        console.log("GET");
         console.log(error);
       }
     );

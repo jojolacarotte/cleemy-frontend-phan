@@ -18,8 +18,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { AppComponent } from "./app.component";
 import { DataService } from "./services/data.service";
 import { HttpClientModule } from "@angular/common/http";
-import { NewExpenseModule } from "./new-expense/app-new-expense.module";
-
+import { FormExpenseComponentModule } from "./form-expense/app-form-expense.module";
 
 @NgModule({
   imports: [
@@ -37,7 +36,7 @@ import { NewExpenseModule } from "./new-expense/app-new-expense.module";
     ReactiveFormsModule,
     MatNativeDateModule,
     MatIconModule,
-    NewExpenseModule
+    FormExpenseComponentModule
   ],
   providers: [DataService],
   declarations: [AppComponent],

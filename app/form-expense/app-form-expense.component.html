@@ -4,12 +4,12 @@
     formControlName="purchasedOn">
 
 	<mat-form-field class="example-full-width">
-		<mat-label>Favorite food</mat-label>
+		<mat-label>Nature de la dépense</mat-label>
 		<input matInput maxlength="600" placeholder="Le Nid" formControlName="nature">
   </mat-form-field>
 		<div formGroupName="originalAmount">
 			<mat-form-field appearance="fill">
-				<mat-label>Amount</mat-label>
+				<mat-label>Montant</mat-label>
 				<input matInput type="number" class="example-right-align"
           formControlName="amount"
           min="1">
@@ -21,7 +21,7 @@
 		</div>
 
 		<mat-form-field class="example-full-width">
-			<mat-label>Leave a comment</mat-label>
+			<mat-label>Commentaire</mat-label>
 			<textarea matInput placeholder="Fête de 5 jours sur l'île d'Oléron"
       formControlName="comment"
       max="600"></textarea>

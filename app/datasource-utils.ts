@@ -5,10 +5,8 @@ import { of } from 'rxjs/observable/of';
 import { MatPaginator, MatSort, PageEvent, Sort } from '@angular/material';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { concat } from 'rxjs/observable/concat';
-import { distinctUntilChanged, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { defer } from 'rxjs/observable/defer';
-import { QueryList } from '@angular/core';
-import { merge } from 'rxjs/observable/merge';
 
 export class SimpleDataSource<T> extends DataSource<T> {
   constructor(private rows$: Observable<T[]>) {super(); }
@@ -52,9 +50,6 @@ function toSortFn<U>(sortFns: PropertySortFns<U> = {}, useDefault = true): (sort
         if (!useDefault) {
           throw new Error(`Unknown sort property [${sort.active}]`);
         }
-
-        //By default assume sort.active is a property name, and sort using the default sort
-        //  uses < and >.
         sortFn = (a: U, b: U) => defaultSort((<any>a)[sort.active], (<any>b)[sort.active]);
       }
 
