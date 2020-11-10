@@ -17,7 +17,7 @@
 		<span class="mat-header-cell" mat-sort-header="amount">Montant</span>
 	</section>
 
-	<mat-expansion-panel *ngFor="let item of displayedRows$ | async">
+	<mat-expansion-panel *ngFor="let item of displayedRows$">
 		<mat-expansion-panel-header class="mat-row">
 			<span class="mat-cell">{{item.purchasedOn | date: 'd MMM y'}}</span>
 			<span class="mat-cell">{{item.nature}}</span>
@@ -29,5 +29,5 @@
 
 </mat-accordion>
 
-<mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [pageSize]="10"
+<mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [(pageSize)]="pageSize"
 	[pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

@@ -20,26 +20,29 @@ export class AppComponent {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  expense: ExpenseItem[] = [];
+  // expense: ExpenseItem[] = [];
 
-  displayedRows$: Observable<ExpenseItem[]>;
+  displayedRows$: ExpenseItem[];
   totalRows$: Observable<number>;
+  pageSize: number = 5;
 
   constructor(private DataService: DataService) {}
 
   ngOnInit() {
-    this.DataService.expense$.subscribe(expense => {
-      this.expense = expense;
-    });
-    this.DataService.getExpenses();
 
+    this.paginator.pageSize = this.pageSize;
     const sortEvents$: Observable<Sort> = fromMatSort(this.sort);
     const pageEvents$: Observable<PageEvent> = fromMatPaginator(this.paginator);
 
-    this.displayedRows$ = this.DataService.expense$.pipe(
-      sortRows(sortEvents$),
-      paginateRows(pageEvents$)
-    );
+    this.DataService.expense$
+      .pipe(
+        sortRows(sortEvents$),
+        paginateRows(pageEvents$)
+      )
+      .subscribe(expense => {
+        this.displayedRows$ = expense;
+      });
+    this.DataService.getExpenses();
     this.totalRows$ = this.DataService.expense$.pipe(map(rows => rows.length));
   }
 }

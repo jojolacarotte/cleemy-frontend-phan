@@ -28,18 +28,18 @@ platformBrowserDynamicTesting()
   })
   .catch(err => console.error(err));
 
-(function bootstrap() {
-  if (window.jasmineRef) {
-    location.reload();
+// (function bootstrap() {
+//   if (window.jasmineRef) {
+//     location.reload();
 
-    return;
-  }
+//     return;
+//   }
 
-  window.onload(new Event("anything"));
-  window.jasmineRef = jasmine.getEnv();
+//   window.onload(new Event("anything"));
+//   window.jasmineRef = jasmine.getEnv();
 
-  TestBed.initTestEnvironment(
-    BrowserDynamicTestingModule,
-    platformBrowserDynamicTesting()
-  );
-})();
+//   TestBed.initTestEnvironment(
+//     BrowserDynamicTestingModule,
+//     platformBrowserDynamicTesting()
+//   );
+// })();
